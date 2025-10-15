@@ -1,53 +1,49 @@
-name: Android CI
+name: monacer
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+version: 1.0.0+1
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+environment:
+  sdk: ^3.9.2
 
-    steps:
-      - uses: actions/checkout@v4
+dependencies:
+  flutter:
+    sdk: flutter
 
-      - name: Install Flutter SDK manually
-        run: |
-          git clone https://github.com/flutter/flutter.git -b stable /opt/flutter
-          echo "/opt/flutter/bin" >> $GITHUB_PATH
-          export PATH="$PATH:/opt/flutter/bin"
-          flutter --version
+  cupertino_icons: ^1.0.8
+  provider: ^6.0.5
+  shared_preferences: ^2.1.1
+  flutter_local_notifications: ^15.1.0+1
+  # firebase_messaging: ^14.6.3
+  # Temporarily disabled for web debug run due to firebase_messaging_web interop compilation issues.
+  lottie: ^2.4.0
+  intl: ^0.20.2
+  flutter_localizations:
+    sdk: flutter
+  table_calendar: ^3.0.8
+  http: ^1.0.0
+  timezone: ^0.9.4
+  uuid: ^3.0.7
+  google_fonts: ^5.0.0
+  flutter_animate: ^4.0.0
+  awesome_notifications: ^0.10.1
+  flutter_svg: ^1.1.6
 
-      - name: Upgrade Flutter
-        run: |
-          export PATH="$PATH:/opt/flutter/bin"
-          flutter upgrade
+  # Optional encryption helper (placeholder for secure storage)
+  # encrypt: ^6.0.0  # removed placeholder to avoid dependency resolution failures; replace with a supported package if needed (e.g. flutter_secure_storage)
 
-      - name: Check Flutter & Dart version
-        run: |
-          export PATH="$PATH:/opt/flutter/bin"
-          flutter --version
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
 
-      - name: Install dependencies
-        run: |
-          export PATH="$PATH:/opt/flutter/bin"
-          flutter pub get
+flutter:
+  uses-material-design: true
 
-      - name: Build APK
-        env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: |
-          export PATH="$PATH:/opt/flutter/bin"
-          echo "Building release APK..."
-          flutter build apk --release
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+  assets:
+    - assets/mockups/hero.png
+    - assets/mockups/hero2.png
+    - assets/mockups/hero3.png
+    - assets/icons/app_icon_512.png
+    - assets/lotties/loading.json
