@@ -13,11 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Clear Flutter cache
+        run: |
+          rm -rf $HOME/.flutter
+          rm -rf $HOME/.pub-cache
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0'
+          flutter-version: '3.24.3'
           channel: 'stable'
+
+      - name: Check Flutter version
+        run: flutter --version
 
       - name: Install dependencies
         run: flutter pub get
