@@ -15,18 +15,25 @@ jobs:
 
       - name: Install Flutter SDK manually
         run: |
-          sudo git clone https://github.com/flutter/flutter.git -b stable /opt/flutter
+          git clone https://github.com/flutter/flutter.git -b stable /opt/flutter
           echo "/opt/flutter/bin" >> $GITHUB_PATH
+          export PATH="$PATH:/opt/flutter/bin"
           flutter --version
 
       - name: Upgrade Flutter
-        run: flutter upgrade
+        run: |
+          export PATH="$PATH:/opt/flutter/bin"
+          flutter upgrade
 
       - name: Check Flutter & Dart version
-        run: flutter --version
+        run: |
+          export PATH="$PATH:/opt/flutter/bin"
+          flutter --version
 
       - name: Install dependencies
-        run: flutter pub get
+        run: |
+          export PATH="$PATH:/opt/flutter/bin"
+          flutter pub get
 
       - name: Build APK
         env:
@@ -35,6 +42,7 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
+          export PATH="$PATH:/opt/flutter/bin"
           echo "Building release APK..."
           flutter build apk --release
 
