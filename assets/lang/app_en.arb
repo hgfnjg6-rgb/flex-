@@ -1,0 +1,12 @@
+{
+  "appTitle": "MonaCare",
+  "onboarding_title_1": "Track & Organize",
+  "onboarding_body_1": "Track symptoms, log cycles and get predictions.",
+  "onboarding_title_2": "How it works",
+  "onboarding_body_2": "Enter your cycle length and last period to predict your fertility window.",
+  "onboarding_title_3": "Notifications",
+  "onboarding_body_3": "Set reminders for period, ovulation and medication.",
+  "next": "Next",
+  "skip": "Skip",
+  "getStarted": "Get Started"
+}
